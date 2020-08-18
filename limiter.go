@@ -22,25 +22,15 @@ type Context struct {
 
 // Limiter is the limiter instance.
 type Limiter struct {
-	Store   Store
-	Rate    Rate
-	Options Options
+	Store Store
+	Rate  Rate
 }
 
 // New returns an instance of Limiter.
-func New(store Store, rate Rate, options ...Option) *Limiter {
-	opt := Options{
-		IPv4Mask:           DefaultIPv4Mask,
-		IPv6Mask:           DefaultIPv6Mask,
-		TrustForwardHeader: false,
-	}
-	for _, o := range options {
-		o(&opt)
-	}
+func New(store Store, rate Rate) *Limiter {
 	return &Limiter{
-		Store:   store,
-		Rate:    rate,
-		Options: opt,
+		Store: store,
+		Rate:  rate,
 	}
 }
 
